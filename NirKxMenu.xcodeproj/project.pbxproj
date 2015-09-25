@@ -12,6 +12,7 @@
 		DB9323941BB4C90B00467F30 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB9323921BB4C90B00467F30 /* Main.storyboard */; };
 		DB9323961BB4C90B00467F30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB9323951BB4C90B00467F30 /* Assets.xcassets */; };
 		DB9323991BB4C90B00467F30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB9323971BB4C90B00467F30 /* LaunchScreen.storyboard */; };
+		DB9323A21BB4C93100467F30 /* NirKxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9323A11BB4C93100467F30 /* NirKxMenu.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,9 @@
 		DB9323951BB4C90B00467F30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB9323981BB4C90B00467F30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DB93239A1BB4C90B00467F30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DB9323A01BB4C93100467F30 /* NirKxMenu-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NirKxMenu-Bridging-Header.h"; sourceTree = "<group>"; };
+		DB9323A11BB4C93100467F30 /* NirKxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NirKxMenu.m; sourceTree = "<group>"; };
+		DB9323A31BB4C93F00467F30 /* NirKxMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NirKxMenu.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,9 @@
 		DB93238D1BB4C90B00467F30 /* NirKxMenu */ = {
 			isa = PBXGroup;
 			children = (
+				DB9323A31BB4C93F00467F30 /* NirKxMenu.h */,
+				DB9323A11BB4C93100467F30 /* NirKxMenu.m */,
+				DB9323A01BB4C93100467F30 /* NirKxMenu-Bridging-Header.h */,
 				DB93238E1BB4C90B00467F30 /* AppDelegate.swift */,
 				DB9323901BB4C90B00467F30 /* ViewController.swift */,
 				DB9323921BB4C90B00467F30 /* Main.storyboard */,
@@ -90,6 +97,7 @@
 		DB9323831BB4C90B00467F30 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = NSNirvana;
 				TargetAttributes = {
@@ -136,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB9323911BB4C90B00467F30 /* ViewController.swift in Sources */,
+				DB9323A21BB4C93100467F30 /* NirKxMenu.m in Sources */,
 				DB93238F1BB4C90B00467F30 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -247,10 +256,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = NirKxMenu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Azure.NirKxMenu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "NirKxMenu/NirKxMenu-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -258,10 +270,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = NirKxMenu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Azure.NirKxMenu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "NirKxMenu/NirKxMenu-Bridging-Header.h";
 			};
 			name = Release;
 		};

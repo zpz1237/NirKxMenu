@@ -43,8 +43,6 @@ typedef struct {
     Boolean hasSeperatorLine;
     Boolean seperatorLineHasInsets;
     Color textColor;
-    Color selectedColor;
-    Color speratorColor;
     Color menuBackgroundColor;
     
 }OptionalConfiguration;

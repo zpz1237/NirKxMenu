@@ -21,16 +21,17 @@
 
 // - (void) dealloc { NSLog(@"dealloc %@", self); }
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame maskSetting:(Boolean)mask
 {
     self = [super initWithFrame:frame];
     
     if (self) {
         
-        //配置：覆盖在原View上的遮罩层是否存在
-        self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.17];
-        
-        self.opaque = NO;
+        if (mask) {
+            self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.17];
+        } else {
+            self.backgroundColor = [UIColor clearColor];
+        }
         
         UITapGestureRecognizer *gestureRecognizer;
         gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
@@ -144,13 +145,6 @@ typedef enum {
         self.opaque = YES;
         self.alpha = 0;
         
-        //配置：是否存在菜单阴影
-        //self.layer.shadowOpacity = 0.5;
-        self.layer.shadowOffset = CGSizeMake(2, 2);
-        self.layer.shadowRadius = 2;
-        
-        self.layer.shadowColor = [[UIColor blackColor] CGColor];
-        
     }
     
     return self;
@@ -178,6 +172,15 @@ typedef enum {
     const CGFloat heightHalf = contentSize.height * 0.5f;
     
     const CGFloat kMargin = 5.f;
+    
+    //此处设置阴影
+    if (self.kxMenuViewOptions.shadowOfMenu) {
+        self.layer.shadowOpacity = 0.5;
+        self.layer.shadowOffset = CGSizeMake(2, 2);
+        self.layer.shadowRadius = 2;
+        
+        self.layer.shadowColor = [[UIColor blackColor] CGColor];
+    }
     
     if (heightPlusArrow < (outerHeight - rectY1)) {
         
@@ -304,7 +307,8 @@ typedef enum {
     
     [self setupFrameInView:view fromRect:rect];
     
-    KxMenuOverlay *overlay = [[KxMenuOverlay alloc] initWithFrame:view.bounds];
+    KxMenuOverlay *overlay = [[KxMenuOverlay alloc] initWithFrame:view.bounds maskSetting:self.kxMenuViewOptions.maskToBackground];
+
     [overlay addSubview:self];
     [view addSubview:overlay];
     
@@ -378,10 +382,10 @@ typedef enum {
     
     const CGFloat kMinMenuItemHeight = 32.f;
     const CGFloat kMinMenuItemWidth = 32.f;
-    //配置三：左右边距
-    const CGFloat kMarginX = 7.f;
-    //配置四：上下边距 
-    const CGFloat kMarginY = 9.f;
+    //配置：左右边距
+    const CGFloat kMarginX = self.kxMenuViewOptions.marginXSpacing;
+    //配置：上下边距
+    const CGFloat kMarginY = self.kxMenuViewOptions.marginYSpacing;
     
     UIFont *titleFont = [KxMenu titleFont];
     if (!titleFont) titleFont = [UIFont boldSystemFontOfSize:16];
@@ -406,12 +410,11 @@ typedef enum {
         const CGSize titleSize = [menuItem.title sizeWithFont:titleFont];
         const CGSize imageSize = menuItem.image.size;
         
-        //这个地方为header和Footer预留了高度 圆角高度要解决一下 13 = 2 * 6.5
+        //这个地方为header和Footer预留了高度
         const CGFloat itemHeight = MAX(titleSize.height, imageSize.height) + kMarginY * 2;
         
-        //配置：这个25就是字图间距
         //这个地方设置item宽度
-        const CGFloat itemWidth = ((!menuItem.enabled && !menuItem.image) ? titleSize.width : maxImageWidth + titleSize.width) + kMarginX * 2 + 25;
+        const CGFloat itemWidth = ((!menuItem.enabled && !menuItem.image) ? titleSize.width : maxImageWidth + titleSize.width) + kMarginX * 2 + self.kxMenuViewOptions.intervalSpacing;
         
         if (itemHeight > maxItemHeight)
             maxItemHeight = itemHeight;
@@ -423,16 +426,21 @@ typedef enum {
     maxItemWidth  = MAX(maxItemWidth, kMinMenuItemWidth);
     maxItemHeight = MAX(maxItemHeight, kMinMenuItemHeight);
     
-    //这个地方设置字图间距   配置：这个25就是字图间距
+    //这个地方设置字图间距
     //const CGFloat titleX = kMarginX * 2 + maxImageWidth;
-    const CGFloat titleX = maxImageWidth + 25;
+    const CGFloat titleX = maxImageWidth + self.kxMenuViewOptions.intervalSpacing;
     
     const CGFloat titleWidth = maxItemWidth - titleX - kMarginX *2;
     
     UIImage *selectedImage = [KxMenuView selectedImage:(CGSize){maxItemWidth, maxItemHeight + 2}];
     //配置：分隔线是与内容等宽还是与菜单等宽
-    //UIImage *gradientLine = [KxMenuView gradientLine: (CGSize){maxItemWidth - kMarginX * 4, 1}];
-    UIImage *gradientLine = [KxMenuView gradientLine: (CGSize){maxItemWidth, 0.4}];
+    int insets = 0;
+    
+    if (self.kxMenuViewOptions.seperatorLineHasInsets) {
+        insets = 4;
+    }
+    
+    UIImage *gradientLine = [KxMenuView gradientLine: (CGSize){maxItemWidth- kMarginX * insets, 0.4}];
     
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectZero];
     contentView.autoresizingMask = UIViewAutoresizingNone;
@@ -447,8 +455,7 @@ typedef enum {
     
     for (KxMenuItem *menuItem in _menuItems) {
         
-        //这里Y轴位置要处理一下
-        const CGRect itemFrame = (CGRect){0, itemY-kMarginY * 2 + 6.5, maxItemWidth, maxItemHeight};
+        const CGRect itemFrame = (CGRect){0, itemY-kMarginY * 2 + self.kxMenuViewOptions.menuCornerRadius, maxItemWidth, maxItemHeight};
         
         UIView *itemView = [[UIView alloc] initWithFrame:itemFrame];
         itemView.autoresizingMask = UIViewAutoresizingNone;
@@ -507,7 +514,8 @@ typedef enum {
             titleLabel.textAlignment = menuItem.alignment;
             
             //配置：menuItem字体颜色
-            titleLabel.textColor = menuItem.foreColor ? menuItem.foreColor : [UIColor blackColor];
+            //titleLabel.textColor = menuItem.foreColor ? menuItem.foreColor : [UIColor blackColor];
+            titleLabel.textColor = [UIColor colorWithRed:self.kxMenuViewOptions.textColor.R green:self.kxMenuViewOptions.textColor.G blue:self.kxMenuViewOptions.textColor.B alpha:1];
             
             titleLabel.backgroundColor = [UIColor clearColor];
             
@@ -530,15 +538,21 @@ typedef enum {
         if (itemNum < _menuItems.count - 1) {
             
             UIImageView *gradientView = [[UIImageView alloc] initWithImage:gradientLine];
+            
             //配置：分隔线是与内容等宽还是与菜单等宽
-            //gradientView.frame = (CGRect){kMarginX * 2, maxItemHeight + 1, gradientLine.size};
-            gradientView.frame = (CGRect){0, maxItemHeight + 1 , gradientLine.size};
+            if (self.kxMenuViewOptions.seperatorLineHasInsets) {
+                gradientView.frame = (CGRect){kMarginX * 2, maxItemHeight + 1, gradientLine.size};
+            } else {
+                gradientView.frame = (CGRect){0, maxItemHeight + 1 , gradientLine.size};
+            }
             
             gradientView.contentMode = UIViewContentModeLeft;
             
             //配置：有无分隔线
-            [itemView addSubview:gradientView];
-            itemY += 2;
+            if (self.kxMenuViewOptions.hasSeperatorLine) {
+                [itemView addSubview:gradientView];
+                itemY += 2;
+            }
             
             itemY += maxItemHeight;
         }
@@ -546,10 +560,9 @@ typedef enum {
         ++itemNum;
     }
     
-    //这里加的6.5是圆角半径
-    itemY += 6.5;
+    itemY += self.kxMenuViewOptions.menuCornerRadius;
     
-    contentView.frame = (CGRect){0, 0, maxItemWidth, itemY + kMarginY * 2 + 12};
+    contentView.frame = (CGRect){0, 0, maxItemWidth, itemY + kMarginY * 2 + 5.5 + self.kxMenuViewOptions.menuCornerRadius};
     
     return contentView;
 }
@@ -584,12 +597,11 @@ typedef enum {
 
 + (UIImage *) selectedImage: (CGSize) size
 {
+
     const CGFloat locations[] = {0,1};
-    //配置：选中时阴影的颜色
+    //配置：选中时阴影的颜色  -- 隐藏属性
     const CGFloat components[] = {
-        //0.216, 0.471, 0.871, 1,
         0.890,0.890,0.890,1,
-        //0.059, 0.353, 0.839, 1,
         0.890,0.890,0.890,1
     };
     
@@ -600,14 +612,9 @@ typedef enum {
 {
     const CGFloat locations[5] = {0,0.2,0.5,0.8,1};
     
-    const CGFloat R = 0.890f, G = 0.890f, B = 0.890f; //分隔线的颜色
+    const CGFloat R = 0.890f, G = 0.890f, B = 0.890f; //分隔线的颜色 -- 隐藏属性
     
     const CGFloat components[20] = {
-        //        R,G,B,0.1,
-        //        R,G,B,0.4,
-        //        R,G,B,0.7,
-        //        R,G,B,0.4,
-        //        R,G,B,0.1
         R,G,B,1,
         R,G,B,1,
         R,G,B,1,
@@ -650,13 +657,11 @@ typedef enum {
              inContext:(CGContextRef) context
 {
     
-    //配置十四：整个Menu的底色 重中之重
+    //配置：整个Menu的底色 重中之重
     
-    //CGFloat R0 = 0.267, G0 = 0.303, B0 = 0.335;
-    CGFloat R0 = 1, G0 = 1, B0 = 1;
+    CGFloat R0 = self.kxMenuViewOptions.menuBackgroundColor.R, G0 = self.kxMenuViewOptions.menuBackgroundColor.G, B0 = self.kxMenuViewOptions.menuBackgroundColor.B;
     
-    //CGFloat R1 = 0.040, G1 = 0.040, B1 = 0.040;
-    CGFloat R1 = 1, G1 = 1, B1 = 1;
+    CGFloat R1 = R0, G1 = G0, B1 = B0;
     
     UIColor *tintColor = [KxMenu tintColor];
     if (tintColor) {
@@ -755,7 +760,7 @@ typedef enum {
     
     //配置：这里修改菜单圆角
     UIBezierPath *borderPath = [UIBezierPath bezierPathWithRoundedRect:bodyFrame
-                                                          cornerRadius:6.5];
+                                                          cornerRadius:self.kxMenuViewOptions.menuCornerRadius];
     
     const CGFloat locations[] = {0, 1};
     const CGFloat components[] = {

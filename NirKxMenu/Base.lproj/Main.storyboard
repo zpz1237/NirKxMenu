@@ -18,49 +18,49 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vcv-pO-xoE">
-                                <rect key="frame" x="20" y="70" width="46" height="30"/>
+                                <rect key="frame" x="20" y="70" width="59" height="30"/>
                                 <animations/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Click me"/>
                                 <connections>
                                     <action selector="Clicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tlA-5T-N1R"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wQ6-Bd-1F5">
-                                <rect key="frame" x="20" y="525" width="46" height="30"/>
+                                <rect key="frame" x="20" y="525" width="59" height="30"/>
                                 <animations/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Click me"/>
                                 <connections>
                                     <action selector="Clicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Va5-FS-BuB"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBu-au-bpX">
-                                <rect key="frame" x="20" y="285" width="46" height="30"/>
+                                <rect key="frame" x="20" y="285" width="59" height="30"/>
                                 <animations/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Click me"/>
                                 <connections>
                                     <action selector="Clicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LNa-Na-EvG"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TuH-Zc-Fw8">
-                                <rect key="frame" x="534" y="525" width="46" height="30"/>
+                                <rect key="frame" x="521" y="525" width="59" height="30"/>
                                 <animations/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Click me"/>
                                 <connections>
                                     <action selector="Clicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ybj-5b-U1f"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b2k-j7-7ad">
-                                <rect key="frame" x="534" y="70" width="46" height="30"/>
+                                <rect key="frame" x="521" y="70" width="59" height="30"/>
                                 <animations/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Click me"/>
                                 <connections>
                                     <action selector="Clicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DEo-G2-2a8"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6FU-ec-ivf">
-                                <rect key="frame" x="534" y="285" width="46" height="30"/>
+                                <rect key="frame" x="521" y="285" width="59" height="30"/>
                                 <animations/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Click me"/>
                                 <connections>
                                     <action selector="Clicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZOh-nY-PNq"/>
                                 </connections>

@@ -1,0 +1,28 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "711F5253B8EAB90DB5C792A8503105BAFA484AFD",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "711F5253B8EAB90DB5C792A8503105BAFA484AFD" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "7A1531A3-7DB3-44ED-8555-F9007619C215",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "711F5253B8EAB90DB5C792A8503105BAFA484AFD" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "NirKxMenu",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "NirKxMenu.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/xieweizhi\/NirKxMenu",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "711F5253B8EAB90DB5C792A8503105BAFA484AFD"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/zpz1237\/NirKxMenu",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "711F5253B8EAB90DB5C792A8503105BAFA484AFD"
+    }
+  ]
+}

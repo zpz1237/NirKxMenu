@@ -48,9 +48,12 @@
 - (void)singleTap:(UITapGestureRecognizer *)recognizer
 {
     for (UIView *v in self.subviews) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
         if ([v isKindOfClass:[KxMenuView class]] && [v respondsToSelector:@selector(dismissMenu:)]) {
             [v performSelector:@selector(dismissMenu:) withObject:@(YES)];
         }
+#pragma clang diagnostic pop
     }
 }
 
@@ -407,7 +410,11 @@ typedef enum {
     
     for (KxMenuItem *menuItem in _menuItems) {
         
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+        const CGSize titleSize = [menuItem.title sizeWithAttributes:@{NSFontAttributeName: titleFont}];
+#else
         const CGSize titleSize = [menuItem.title sizeWithFont:titleFont];
+#endif       
         const CGSize imageSize = menuItem.image.size;
         
         //这个地方为header和Footer预留了高度
